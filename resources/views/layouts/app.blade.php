@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+  @notifyCss
+
   <style>
     .carousel {
         width: 100%;
@@ -93,6 +95,7 @@
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="img/logo.png" />
+
 </head>
 <body>
   <div class="container-scroller">
@@ -333,6 +336,38 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+  <script>
+    // Fonction pour gérer l'affichage des champs
+    function gererAffichage() {
+       var typeSelect = document.getElementById('typeStage');
+       var cvGroup = document.getElementById('cvGroup');
+       var ecoleGroup = document.getElementById('ecoleGroup');
+    
+       if (typeSelect.value === 'academique') {
+           cvGroup.style.display = 'none';
+           ecoleGroup.style.display = 'block';
+           // Gestion des champs required
+           document.getElementById('cv').removeAttribute('required');
+           document.getElementById('ecole').setAttribute('required', '');
+       } else if (typeSelect.value === 'professionnel') {
+           cvGroup.style.display = 'block';
+           ecoleGroup.style.display = 'none';
+           // Gestion des champs required
+           document.getElementById('ecole').removeAttribute('required');
+           document.getElementById('cv').setAttribute('required', '');
+       }
+    }
+    
+    // Exécuter la fonction au chargement de la page
+    window.onload = function() {
+       gererAffichage();
+    }
+    
+    // Ajouter un écouteur d'événement pour le changement de sélection (redondant avec onchange mais plus sûr)
+    document.getElementById('typeStage').addEventListener('change', gererAffichage);
+    </script>
+
+ 
 
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
@@ -356,6 +391,9 @@
   <script src="js/dashboard.js"></script>
   <script src="js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
+
+  <x-notify::notify />
+  @notifyJs
 </body>
 
 </html>

@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 class AppController extends Controller
 {
     public function index(Request $request){
+        notify()->error("Renseignez l'ecole");
         return view('/dashboard',[
             'user' => $request->user(),
+            
         ]);
     }
     public function new(){
