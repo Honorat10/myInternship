@@ -116,6 +116,12 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
+
+#laravel-notify{
+  z-index: 9999;
+  }
+
+  
 @-moz-keyframes flash {
   0% {
     opacity: 1;

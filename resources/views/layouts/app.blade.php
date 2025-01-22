@@ -311,7 +311,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/dashboard">
+            <a class="nav-link" href="index.html">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
@@ -319,7 +319,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/new">
+            <a class="nav-link" href="pages/documentation/documentation.html">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Nouvelle demande</span>
             </a>
@@ -333,36 +333,7 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-  <script>
-    // Fonction pour gérer l'affichage des champs
-    function gererAffichage() {
-       var typeSelect = document.getElementById('typeStage');
-       var cvGroup = document.getElementById('cvGroup');
-       var ecoleGroup = document.getElementById('ecoleGroup');
-    
-       if (typeSelect.value === 'academique') {
-           cvGroup.style.display = 'none';
-           ecoleGroup.style.display = 'block';
-           // Gestion des champs required
-           document.getElementById('cv').removeAttribute('required');
-           document.getElementById('ecole').setAttribute('required', '');
-       } else if (typeSelect.value === 'professionnel') {
-           cvGroup.style.display = 'block';
-           ecoleGroup.style.display = 'none';
-           // Gestion des champs required
-           document.getElementById('ecole').removeAttribute('required');
-           document.getElementById('cv').setAttribute('required', '');
-       }
-    }
-    
-    // Exécuter la fonction au chargement de la page
-    window.onload = function() {
-       gererAffichage();
-    }
-    
-    // Ajouter un écouteur d'événement pour le changement de sélection (redondant avec onchange mais plus sûr)
-    document.getElementById('typeStage').addEventListener('change', gererAffichage);
-    </script>
+
   <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

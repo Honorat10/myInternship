@@ -16,6 +16,11 @@ class AppController extends Controller
         return view('/new');
     }
     public function save(TraineeRequest $request){
-
+        if ($request->type_stage == "academique") {
+            if ($request->ecole == "") {
+                notify()->error("Renseignez l'ecole");
+                return redirect()->back();
+            }
+        }
     }
 }
