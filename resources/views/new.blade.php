@@ -5,15 +5,11 @@
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
-                    @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                    @endif
+                  
 
                     <div class="card-body">
                         <h4 class="card-title">myInternShip / Nouvelle demande</h4>
-                        <form class="forms-sample" method="POST" action="/new" enctype="multipart/form-data">
+                        <form class="forms-sample" method="POST" action="{{ route('newsave', auth()->id()) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Nom complet</label>

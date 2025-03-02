@@ -1,4 +1,4 @@
-@extends('./layouts/app')
+@extends('../layouts/app')
 @section('page-content')
 <div class="main-panel">
     <div class="content-wrapper">
@@ -59,7 +59,10 @@
                                     <th>Nom Complet</th>
                                     <th>Service</th>
                                     <th>Date de Dépôt</th>
-                                    <th>Status</th>
+                                  
+                                    <th>CV</th> <!-- Ajout de la colonne CV -->
+                                    <th>Lettre</th> <!-- Ajout de la colonne Lettre -->
+                                    <th>Actions</th> <!-- Ajout de la colonne Actions -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,21 +71,50 @@
                                         <td>{{ $demande->nom_complet }}</td>
                                         <td>{{ $demande->service }}</td>
                                         <td>{{ \Carbon\Carbon::parse($demande->date_depot)->format('d M Y') }}</td>
+                                        
                                         <td>
-                                            <div class="badge badge-{{ $demande->status == 'en attente' ? 'warning' : 'success' }}">
-                                                {{ ucfirst($demande->status) }}
-                                            </div>
+                                            <!-- Lien vers le fichier CV -->
+                                            @if($demande->cv)
+                                                <a href="{{ asset($demande->cv) }}" target="_blank" class="btn btn-info btn-sm">Voir CV</a>
+                                            @else
+                                                <span>Aucun fichier</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <!-- Lien vers le fichier Lettre -->
+                                            @if($demande->lettre)
+                                                <a href="{{ asset(  $demande->lettre) }}" target="_blank" class="btn btn-info btn-sm">Voir Lettre</a>
+                                            @else
+                                                <span>Aucun fichier</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <!-- Bouton "Approuver" -->
+                                            <form action="{{ route('admin.demande.approuver', $demande->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-success btn-sm">Approuver</button>
+                                            </form>
+                                
+                                            <!-- Bouton "Rejeter" -->
+                                            <form action="{{ route('admin.demande.rejeter', $demande->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-danger btn-sm">Rejeter</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center">Aucune demande trouvée</td>
+                                        <td colspan="7" class="text-center">Aucune demande trouvée</td> <!-- Changer colspan à 7 -->
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
+                
             </div>
         </div>
     </div>

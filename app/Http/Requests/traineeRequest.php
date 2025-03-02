@@ -23,7 +23,7 @@ class TraineeRequest extends FormRequest
     {
         return [
             'nom_complet' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
             'service' => 'required|string|max:255',
             'type_stage' => 'required|in:academique,professionnel',
             'ecole' => 'nullable|string|max:255', // École non obligatoire
@@ -46,8 +46,7 @@ class TraineeRequest extends FormRequest
             
             'email.required' => 'Le champ "Email" est obligatoire.',
             'email.email' => 'Veuillez fournir une adresse email valide.',
-            'email.unique' => 'Cette adresse email est déjà utilisée.',
-            
+          
             'service.required' => 'Le champ "Service" est obligatoire.',
             'service.string' => 'Le champ "Service" doit être une chaîne de caractères.',
             'service.max' => 'Le champ "Service" ne peut pas dépasser 255 caractères.',

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  @notifyCss
+
 
   <style>
     .carousel {
@@ -77,6 +77,7 @@
         cursor: pointer;
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -144,10 +145,14 @@
                 <i class="ti-settings text-primary"></i>
                 profile
               </a>
-              <a class="dropdown-item" href="{{route('logout')}}">
+              <form action="{{ route('logout') }}" method="POST" style="display: none;" id="logoutForm">
+                @csrf
+            </form>
+            
+            <a class="dropdown-item" href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">
                 <i class="ti-power-off text-primary"></i>
-                Déconnection
-              </a>
+                Déconnexion
+            </a>
             </div>
           </li>
           
@@ -314,7 +319,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/dashboard">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Tableau de bord</span>
             </a>
@@ -322,7 +327,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
+            <a class="nav-link" href="/new">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Nouvelle demande</span>
             </a>
@@ -335,6 +340,24 @@
     </div>   
     <!-- page-body-wrapper ends -->
   </div>
+  @if(session('error'))
+    <script>
+        Swal.fire({
+            title: "Erreur!",
+            text: "{{ session('error') }}",
+            icon: "error"
+        });
+    </script>
+@endif
+@if(session('success'))
+    <script>
+        Swal.fire({
+            title: "Succès!",
+            text: "{{ session('success') }}",
+            icon: "success"
+        });
+    </script>
+@endif
   <!-- container-scroller -->
   <script>
     // Fonction pour gérer l'affichage des champs
